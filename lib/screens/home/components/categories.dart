@@ -21,7 +21,7 @@ class _CategoriesState extends State<Categories> {
       height: 25,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: Constants.categories.length,
+        itemCount: Constants.WomanCat.length,
         itemBuilder: buildList,
       ),
     );
@@ -34,7 +34,7 @@ class _CategoriesState extends State<Categories> {
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: Column(
           children: [
-            Text(Constants.categories[index], style: TextStyle(fontWeight: FontWeight.bold, color: index == selectedIndex? Constants.textDarkColor : Constants.textLightColor)),
+            Text(Constants.WomanCat[index], style: TextStyle(fontWeight: FontWeight.bold, color: index == selectedIndex? Constants.textDarkColor : Constants.textLightColor)),
             Container(width: 30, height: 2, color: index == selectedIndex? Constants.textDarkColor : Colors.transparent)
           ],
         ),

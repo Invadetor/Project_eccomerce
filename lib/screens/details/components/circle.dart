@@ -11,9 +11,10 @@ class Circle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(100),
-      width: 10,
-      decoration: BoxDecoration(shape: BoxShape.circle, color: c, border: Border.all(color: selected ? Colors.blueGrey : Colors.transparent)),
+      width: 40,
+      height: 40,
+      margin: const EdgeInsets.only(right: 10),
+      decoration: BoxDecoration(shape: BoxShape.circle, color: c, border: Border.all(color: selected ? Colors.black : Colors.transparent, width: 2)),
     );
   }
 }
@@ -37,10 +38,10 @@ class _StateColorSelector extends State<ColorSelector> {
       children: [
         if(widget.colors != null)
           for (int i = 0; i < widget.colors!.length; i++)
-            GestureDetector(child: Circle(c: Colors.black, selected: selectedIndex == i), onTap: (){
-              setState(() {
-              selectedIndex = i;
-              });},)
+            GestureDetector(child: Circle(c: widget.colors?[i] ?? Colors.black, selected: selectedIndex == i), onTap: (){
+              setState((){selectedIndex = i;});
+              },
+            )
       ],
     );
   }

@@ -18,4 +18,5 @@ class Details extends StatelessWidget {
       body: Body(p: p),
     );
   }
+
 }
