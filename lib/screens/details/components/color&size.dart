@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:progetto_ecommerce/constants.dart';
+import 'package:progetto_ecommerce/helpers/constants.dart';
 
 import '../../../models/product.dart';
 import 'circle.dart';

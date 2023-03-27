@@ -3,12 +3,13 @@ import 'dart:ui';
 
 class Product {
   String? image, title, description, subtitle, category;
-  int? price, size, id, quantita;
+  int? price, size, id, quantita, inCart;
   List<Color>? colors;
 
   Product.fromJson (jsonMap) {
     id = jsonMap["id"] as int;
     quantita = jsonMap["quantita"] as int;
+    inCart = jsonMap["inCart"] as int;
     title = jsonMap["title"];
     subtitle = jsonMap["subtitle"];
     size = jsonMap["size"] as int;
@@ -17,7 +18,7 @@ class Product {
     description = jsonMap["description"];
     category = jsonMap["categoria"];
     List<dynamic> ls = jsonMap["colors"];
-    colors = List<Color>.from(ls.map((e) => Color(int.parse(e.replaceAll("0xFF", ""), radix: 16))));
+    colors = List<Color>.from(ls.map((e) => Color(int.parse(e.toString().replaceAll("0xFF", ""), radix: 16))));
   }
 
   Product({
@@ -27,6 +28,7 @@ class Product {
     this.title,
     this.subtitle,
     this.category,
+    this.inCart,
     this.price,
     this.description,
     this.size,
@@ -42,9 +44,10 @@ class Product {
     map["subtitle"] = subtitle;
     map["categoria"] = category;
     map["price"] = price;
+    map["inCart"] = inCart;
     map["description"] = description;
     map["size"] = size;
-    map["colors"] = colors?.map((e) => e.value.toString()).toList();
+    map["colors"] = colors?.map((e) => e.value).toList();
     return map;
   }
 }

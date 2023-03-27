@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../constants.dart';
+import '../../../helpers/constants.dart';
 import '../../../models/product.dart';
 
 class ProductCard extends StatelessWidget {

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/product.dart';
-import '../../myappbar.dart';
+import '../../helpers/myappbar.dart';
 import 'components/body.dart';
 
 class Details extends StatelessWidget {

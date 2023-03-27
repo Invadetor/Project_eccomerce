@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:progetto_ecommerce/constants.dart';
+import 'package:progetto_ecommerce/helpers/constants.dart';
 import 'package:progetto_ecommerce/screens/details/components/color&size.dart';
 import 'package:progetto_ecommerce/screens/details/components/product_name&image.dart';
 import 'package:provider/provider.dart';

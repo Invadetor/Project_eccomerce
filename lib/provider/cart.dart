@@ -6,91 +6,79 @@ import 'package:progetto_ecommerce/models/product.dart';
 
 class Cart extends ChangeNotifier {
 
-  final Map<Product, int> _products = {};
-  DatabaseReference database = FirebaseDatabase.instance.ref("Negozio/cart");
+  Map<int, Product> _products = {};
+  DatabaseReference databaseCart = FirebaseDatabase.instance.ref("Negozio/cart");
 
-  void getAllProducts () async {
-    DataSnapshot ds = await database.get();
+  void set products(Map<int, Product> p) {
+    _products = p;
+  }
+
+  Future<Map<int, Product>> getAllProductsInCart () async {
+    DataSnapshot ds = await databaseCart.get();
     if(ds.exists) {
       var list = ds.value! as List<dynamic>;
-      List<Product> productList = List<Product>.from(list.map((e) => Product.fromJson(e)));
-      productList.forEach((element) {_products[element] = element.quantita!;});
-      notifyListeners();
+      List<Product> productList = List<Product>.from(list.map((e) {
+        if(e != null) {
+          return Product.fromJson(e);
+        }
+      }));
+      for (var element in productList) {_products[element.id??0] = element;}
+      return _products;
     } else {
-      throw Exception("errore");
+      return _products;
     }
   }
 
-  void addToDatabaseCart(Product p, int i) {
-    Map<String, dynamic> map = <String, dynamic>{};
-    map = p.toJson();
-    map["quantita"] = i;
-    database.child(p.id.toString()).update(map);
+
+
+  double get totale {
+    double newTotale = 0;
+    products.forEach((key, value) {newTotale += value.price! * value.inCart!;});
+    return newTotale;
   }
 
-  void addProduct (Product p, int i) {
-    if(_products[p] == null) {
-      _products[p] = i;
-      addToDatabaseCart(p, i);
+  Map<int, Product> get products {return _products;}
+
+  void addProduct (Product p, int i) async {
+    products = await getAllProductsInCart();
+    if(products[p.id??0] == null) {
+      products[p.id??0] = p;
+      products[p.id??0]?.inCart = i;
     } else {
       updateCounter(p, i);
-      updateDatabaseObject(p, i);
     }
+    updateDatabaseProducts();
     notifyListeners();
   }
 
-  void updateDatabaseObject(Product p, int i) async {
-    Map<String, dynamic> map = <String, dynamic>{};
-    map = p.toJson();
-    DataSnapshot ds = await database.child(p.id.toString()).get();
-    if(ds.exists) {
-      var value = ds.value as dynamic;
-      map["quantita"] = value["quantita"] + i;
-      database.child(p.id.toString()).update(map);
+  void updateDatabaseProducts() {
+    Map<String, dynamic> mps = {};
+    for(int i = 0; i < _products.length; i++) {
+      mps[i.toString()] = _products.values.elementAt(i).toJson();
     }
+    databaseCart.set(mps);
   }
 
   void updateCounter (Product p, int i) {
-    _products.update(p, (value) => i + value);
+    p.inCart = (p.inCart! + i);
+    products.update(p.id??0, (value) => p);
   }
 
-  void reduceDatabaseObjectCounter(Product p) async {
-    Map<String, dynamic> map = <String, dynamic>{};
-    map = p.toJson();
-    DataSnapshot ds = await database.child(p.id.toString()).get();
-    if(ds.exists) {
-      var value = ds.value as dynamic;
-      map["quantita"] = value["quantita"] - 1;
-      database.child(p.id.toString()).update(map);
+  void reduceCounter(Product p) {
+    p.inCart = (p.inCart! - 1);
+    products.update(p.id??0, (value) => p);
+    if(products[p.id??0]?.inCart == 0) {
+      removeProduct(p);
+    } else {
+      updateDatabaseProducts();
     }
-  }
-
-  void removeFromCounter(Product p) {
-    products?.update(p, (value) => value - 1);
-    reduceDatabaseObjectCounter(p);
     notifyListeners();
-  }
-
-  void removeDatabaseObject(Product p) {
-    database.child(p.id.toString()).remove();
   }
 
   void removeProduct (Product p) {
-    _products.remove(p);
-    removeDatabaseObject(p);
+    _products.remove(p.id??0);
+    updateDatabaseProducts();
     notifyListeners();
   }
-
-  //void removeOneValue (Product p, int i) {
-  //  _products[p] = i - 1;
-  //  notifyListeners();
-  //}
-
-  void removeAll () {
-    _products.clear();
-    notifyListeners();
-  }
-
-  Map<Product, int>? get products => _products;
 
 }

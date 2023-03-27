@@ -13,7 +13,7 @@ class Body extends StatelessWidget {
           const SizedBox(height: 40),
 
           GestureDetector(
-            onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage()));},
+            onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage(tipo: 0,)));},
             child: Container(
               width: MediaQuery.of(context).size.width/1.2,
               height: 210,
@@ -27,7 +27,7 @@ class Body extends StatelessWidget {
           const SizedBox(height: 40),
 
           GestureDetector(
-            onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage()));},
+            onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage(tipo: 1,)));},
             child: Container(
               width: MediaQuery.of(context).size.width/1.2,
               height: 210,
@@ -43,7 +43,7 @@ class Body extends StatelessWidget {
           const SizedBox(height: 40),
 
           GestureDetector(
-            onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage()));},
+            onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage(tipo: 2,)));},
             child: Container(
               width: MediaQuery.of(context).size.width/1.2,
               height: 210,

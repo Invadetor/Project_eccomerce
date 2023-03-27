@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:progetto_ecommerce/myappbar.dart';
+import 'package:progetto_ecommerce/helpers/myappbar.dart';
 
 import 'body.dart';
 

@@ -6,7 +6,7 @@ import '../models/product.dart';
 
 class ProductDAO {
 
-  DatabaseReference database = FirebaseDatabase.instance.ref("Negozio/prodotti");
+  static DatabaseReference database = FirebaseDatabase.instance.ref("Negozio/prodotti");
 
   //TODO: Convertire una Stringa in un reale numero esadecimale
 
@@ -20,10 +20,9 @@ class ProductDAO {
     }
   }
 
-  Future<List<Product>> getProductOfCategory(String category) async {
+  static Future<List<Product>> getProductOfCategory(String category) async {
     DataSnapshot ds = await database.get();
     if(ds.exists) {
-      //Iterable i = json.decode(ds.value.toString());
       var list = ds.value! as List<dynamic>;
       List<Product> products = List<Product>.from(list.map((e) => Product.fromJson(e)));
       return List.from(products.where((element) => element.category == category));

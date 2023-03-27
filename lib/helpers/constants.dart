@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'models/product.dart';
+import '../models/product.dart';
 
 class Constants {
   static const textDarkColor = Color(0xFF535353);
@@ -11,13 +11,15 @@ class Constants {
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
       "Lorem Ipsum has been the industry's standard dummy text ever since. When an unknown printer took a galley.";
 
-  static List<String> WomanCat = ["Handbag", "Jewellery", "Footwear", "Dresses", "Skirts", "Pants", "Shirts", "Accessories"];
-  static List<String> ManCat = ["Handbag", "Jewellery", "Footwear", "Dresses", "Skirts", "Pants", "Shirts", "Accessories"];
-  static List<String> ChildrenCat = ["Handbag", "Jewellery", "Footwear", "Dresses", "Skirts", "Pants", "Shirts", "Accessories"];
 
 
+  static List<String> WomanCat = ["borse", "gioielli", "scarpe", "vestiti", "gonne"];
+  static List<String> ManCat = ["gioielli", "tute", "pantaloni", "magliette"];
+  static List<String> ChildrenCat = ["pigiami", "tute"];
 
-  static List<Product> products = [
+  static Map<int, List<String>> categories = {0 : WomanCat, 1 : ManCat, 2 : ChildrenCat};
+
+  /*static List<Product> products = [
     Product(
         category: "donna/borse",
         id: 1,
@@ -25,6 +27,8 @@ class Constants {
         subtitle: "Aristocratic Hand Bag",
         price: 234,
         size: 12,
+        quantita: 10,
+        inCart: 0,
         description: dummyText,
         image: "assets/images/bag_1.png",
         colors: [Color(0xFF3D82AE), Color(0xFFE6B398), Color(0xFFFB7883)]),
@@ -35,6 +39,8 @@ class Constants {
         subtitle: "Aristocratic Hand Bag",
         price: 234,
         size: 8,
+        quantita: 10,
+        inCart: 0,
         description: dummyText,
         image: "assets/images/bag_2.png",
         colors: [Color(0xFFD3A984), Color(0xFF3D82AE), Color(0xFFE6B398)]),
@@ -45,6 +51,8 @@ class Constants {
         subtitle: "Aristocratic Hand Bag",
         price: 234,
         size: 10,
+        quantita: 10,
+        inCart: 0,
         description: dummyText,
         image: "assets/images/bag_3.png",
         colors: [Color(0xFF989493), Color(0xFF3D82AE), Color(0xFFD3A984)]),
@@ -55,6 +63,8 @@ class Constants {
         subtitle: "Aristocratic Hand Bag",
         price: 234,
         size: 11,
+        quantita: 10,
+        inCart: 0,
         description: dummyText,
         image: "assets/images/bag_4.png",
         colors: [Color(0xFFE6B398), Color(0xFF989493), Color(0xFF3D82AE)]),
@@ -65,6 +75,8 @@ class Constants {
         subtitle: "Aristocratic Hand Bag",
         price: 234,
         size: 12,
+        quantita: 10,
+        inCart: 0,
         description: dummyText,
         image: "assets/images/bag_5.png",
         colors: [Color(0xFFFB7883), Color(0xFFE6B398), Color(0xFFAEAEAE)]),
@@ -75,9 +87,11 @@ class Constants {
       subtitle: "Aristocratic Hand Bag",
       price: 234,
       size: 12,
+      quantita: 10,
+      inCart: 0,
       description: dummyText,
       image: "assets/images/bag_6.png",
       colors: [Color(0xFFAEAEAE), Color(0xFFFB7883), Color(0xFF3D82AE)],
     ),
-  ];
+  ];*/
 }
